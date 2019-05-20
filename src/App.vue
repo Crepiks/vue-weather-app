@@ -1,60 +1,141 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div class="wrapper">
+    <weather-picture></weather-picture>
+    <weather-info></weather-info>
+    <weather-form></weather-form>
   </div>
 </template>
 
 <script>
+import WeatherForm from './components/Form';
+import WeatherInfo from './components/Weather';
+import WeatherPicture from './components/Picture';
+
 export default {
   name: 'app',
+  components: {
+    WeatherPicture,
+    WeatherForm, 
+    WeatherInfo
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
-h1, h2 {
-  font-weight: normal;
-}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-ul {
-  list-style-type: none;
+* {
+  margin: 0;
   padding: 0;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+body {
+  font-family: "Open Sans", serif;
 }
 
-a {
-  color: #42b983;
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(45,176,224,1);
+  background: -moz-linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(45,176,224,1)), color-stop(100%, rgba(96,40,168,1)));
+  background: -webkit-linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
+  background: -o-linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
+  background: -ms-linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
+  background: linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2db0e0', endColorstr='#6028a8', GradientType=1 );
 }
+
+// .main {
+//   height: 55vh;
+//   background: #2a6bb1;
+//   box-shadow: 0px 2px 80px -20px rgba(0,0,0,0.5);
+//   width: 60%;
+//   margin: 0 auto;
+// }
+
+// .form {
+//   height: 55vh;
+//   padding-top: 100px;
+//   padding-left: 50px;
+//   border-top: 2px solid #113a65;
+//   border-bottom: 2px solid #113a65;
+//   border-right: 2px solid #113a65;
+// }
+
+// input[type="text"] {
+//   background-color: transparent;
+//   border: 0;
+//   border-bottom: solid 2px #113a65;
+//   width: 50%;
+//   padding-bottom: 4px;
+//   color: #fff;
+//   font-weight: lighter;
+//   margin-bottom: 30px;
+//   margin-right: 20px;
+//   font-size: 20px;
+//   outline: none;
+// }
+
+// input::-webkit-input-placeholder {
+//   color: #103a65;
+// }
+
+// input::-moz-placeholder {
+//   color: #103a65;
+// }
+
+// button {
+//   border: 2px solid #103a65;
+//   border-bottom: 4px solid #103a65;
+//   padding: 8px 20px;
+//   margin: 0 2px;
+//   border-radius: 2px;
+//   cursor: pointer;
+//   background-color: #235d9c;
+//   color: #fff;
+//   outline: none!important;
+// }
+
+// button:hover {
+//   border-bottom: 2px solid #103a65;
+//   position: relative;
+//   top: 2px;
+// }
+
+// button:active {
+//   border-bottom: 2px solid transparent;
+//   border-color: transparent;
+//   position: relative;
+//   top: 2px;
+// }
+
+// .info h2 {
+//   font-size: 3em;
+//   color: #fff;
+// }
+
+// .info p {
+//   color: #e4e4e4;
+//   font-weight: bold;
+// }
+
+// .infoWeath {
+//   width: 60%;
+//   font-size: 20px;
+//   color: #fff;
+// }
+
+// .error {
+//   color: #041f3c;
+//   font-weight: bold;
+// }
 </style>
