@@ -3,6 +3,7 @@
     <weather-picture></weather-picture>
     <weather-info></weather-info>
     <weather-form></weather-form>
+    <button @click="getCurrentWeather">Запрос</button>
   </div>
 </template>
 
@@ -11,15 +12,29 @@ import WeatherForm from './components/Form';
 import WeatherInfo from './components/Weather';
 import WeatherPicture from './components/Picture';
 
+import settings from './config/api';
+
 export default {
   name: 'app',
   components: {
-    WeatherPicture,
-    WeatherForm, 
-    WeatherInfo
+    'weather-picture': WeatherPicture,
+    'weather-form': WeatherForm, 
+    'weather-info': WeatherInfo
+  },
+  created() {
+    console.log(settings.apiKey);
   },
   data () {
     return {
+      cityName: settings.deafultCity
+    }
+  },
+  methods: {
+    getCurrentWeather(cityName) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.cityName}&appid=${settings.apiKey}&units=metric`)
+      .then((response) => {
+        console.log(response);
+      })
     }
   }
 }
