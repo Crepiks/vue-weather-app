@@ -6,18 +6,12 @@
 
 <script>
 export default {
-    name: "weather-picture",
-    data() {
-        return {
-
-        }
-    }
+    name: "weather-picture"
 }
 </script>
 
 <style lang="scss">
 .weather-picture {
-    height: 55vh;
     background: url("../assets/forest.jpg") center center no-repeat;
     background-blend-mode: multiply;
     background-color: #484747;

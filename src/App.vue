@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper">
-    <weather-picture></weather-picture>
-    <weather-info></weather-info>
-    <weather-form></weather-form>
-    <button @click="getCurrentWeather">Запрос</button>
+    <weather-picture class="wrapper__item"></weather-picture>
+    <div class="wrapper__item bordered">
+      <weather-info :weather-description="weatherDescription" :temp="temp"></weather-info>
+      <weather-form @get-data="getCurrentWeather" @change-city="changeCity"></weather-form>
+    </div>
   </div>
 </template>
 
@@ -18,23 +19,29 @@ export default {
   name: 'app',
   components: {
     'weather-picture': WeatherPicture,
-    'weather-form': WeatherForm, 
+    'weather-form': WeatherForm,
     'weather-info': WeatherInfo
-  },
-  created() {
-    console.log(settings.apiKey);
   },
   data () {
     return {
-      cityName: settings.deafultCity
+      cityName: settings.deafultCity,
+      temp: null,
+      weatherDescription: ''
     }
   },
   methods: {
-    getCurrentWeather(cityName) {
+    getCurrentWeather() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.cityName}&appid=${settings.apiKey}&units=metric`)
       .then((response) => {
-        console.log(response);
+        response.json().then((data) => {
+          this.temp = data.main.temp;
+          this.weatherDescription = data.weather[0].description;
+          console.log(this.cityName);
+        })
       })
+    },
+    changeCity(newCity) {
+      this.cityName = newCity;
     }
   }
 }
@@ -67,6 +74,22 @@ body {
   background: -ms-linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
   background: linear-gradient(45deg, rgba(45,176,224,1) 0%, rgba(96,40,168,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2db0e0', endColorstr='#6028a8', GradientType=1 );
+
+  &__item {
+    width: 40%;
+    height: 55vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.bordered {
+  border-top: 2px solid #113a65;
+  border-bottom: 2px solid #113a65;
+  border-right: 2px solid #113a65;
 }
 
 // .main {
@@ -75,78 +98,6 @@ body {
 //   box-shadow: 0px 2px 80px -20px rgba(0,0,0,0.5);
 //   width: 60%;
 //   margin: 0 auto;
-// }
-
-// .form {
-//   height: 55vh;
-//   padding-top: 100px;
-//   padding-left: 50px;
-//   border-top: 2px solid #113a65;
-//   border-bottom: 2px solid #113a65;
-//   border-right: 2px solid #113a65;
-// }
-
-// input[type="text"] {
-//   background-color: transparent;
-//   border: 0;
-//   border-bottom: solid 2px #113a65;
-//   width: 50%;
-//   padding-bottom: 4px;
-//   color: #fff;
-//   font-weight: lighter;
-//   margin-bottom: 30px;
-//   margin-right: 20px;
-//   font-size: 20px;
-//   outline: none;
-// }
-
-// input::-webkit-input-placeholder {
-//   color: #103a65;
-// }
-
-// input::-moz-placeholder {
-//   color: #103a65;
-// }
-
-// button {
-//   border: 2px solid #103a65;
-//   border-bottom: 4px solid #103a65;
-//   padding: 8px 20px;
-//   margin: 0 2px;
-//   border-radius: 2px;
-//   cursor: pointer;
-//   background-color: #235d9c;
-//   color: #fff;
-//   outline: none!important;
-// }
-
-// button:hover {
-//   border-bottom: 2px solid #103a65;
-//   position: relative;
-//   top: 2px;
-// }
-
-// button:active {
-//   border-bottom: 2px solid transparent;
-//   border-color: transparent;
-//   position: relative;
-//   top: 2px;
-// }
-
-// .info h2 {
-//   font-size: 3em;
-//   color: #fff;
-// }
-
-// .info p {
-//   color: #e4e4e4;
-//   font-weight: bold;
-// }
-
-// .infoWeath {
-//   width: 60%;
-//   font-size: 20px;
-//   color: #fff;
 // }
 
 // .error {
